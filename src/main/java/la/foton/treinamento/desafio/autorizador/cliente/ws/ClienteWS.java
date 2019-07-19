@@ -38,4 +38,16 @@ public class ClienteWS {
     public Response consultaCliente(@PathParam("cpf") String cpf) throws NegocioException {
         return Response.ok(clienteService.consultaCliente(cpf)).build();
     }
+
+    @GET
+    @Path("/todos")
+    public Response buscarTodos() throws NegocioException {
+        return Response.ok(clienteService.listaTodas()).build();
+    }
+
+    @GET
+    public Response teste(){
+        return Response.ok().build();
+    }
+
 }

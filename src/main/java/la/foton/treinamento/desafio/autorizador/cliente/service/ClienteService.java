@@ -8,6 +8,7 @@ import la.foton.treinamento.desafio.autorizador.common.exception.NegocioExceptio
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Stateless
 public class ClienteService {
@@ -29,5 +30,13 @@ public class ClienteService {
     public Cliente consultaCliente(String cpf) throws NegocioException {
         return clienteDAO.procurarPeloCpf(cpf)
                 .orElseThrow(() -> new NegocioException(Mensagem.CLIENTE_NAO_ENCONTRADO, Response.Status.NOT_FOUND));
+    }
+
+    public List<Cliente> listaTodas() throws NegocioException{
+        List<Cliente> clientes = clienteDAO.listarTodos();
+        if (clientes.isEmpty()){
+            throw new NegocioException(Mensagem.NAO_EXISTEM_CONTAS);
+        }
+        return clientes;
     }
 }

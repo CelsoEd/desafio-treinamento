@@ -11,7 +11,8 @@ public enum Mensagem {
     SALDO_INSUFICIENTE("Saldo Insuficiente."),
 
     // Mensagens de Infraestrutura
-    AUTORIZADOR_NAO_ENCONTRADO("Nao existe um autorizador para o código de transação {0}");
+    AUTORIZADOR_NAO_ENCONTRADO("Nao existe um autorizador para o código de transação {0}"),
+    NAO_EXISTEM_CONTAS("Não foi encontrada nenhuma conta") ;
 
     private String texto;
 
