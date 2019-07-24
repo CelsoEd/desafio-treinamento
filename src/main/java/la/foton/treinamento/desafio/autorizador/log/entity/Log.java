@@ -55,7 +55,6 @@ public class Log {
 	@Convert(converter = CanalDeAtendimentoConverter.class)
 	private CanalDeAtendimento canal;
 
-	@Lob
 	@Column(name = "LOGPRT")
 	private String particao;
 
