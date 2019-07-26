@@ -13,7 +13,7 @@ import la.foton.treinamento.desafio.autorizador.transacao.entity.Transacao;
 
 import javax.ejb.EJB;
 
-@Autorizador(transacao = TipoDaTransacao.DEPOSITO_EM_CONTA)
+@Autorizador(transacao = TipoDaTransacao.DEPOSITO)
 public class AutorizadorDeposito extends AbstractAutorizador {
 
     @EJB

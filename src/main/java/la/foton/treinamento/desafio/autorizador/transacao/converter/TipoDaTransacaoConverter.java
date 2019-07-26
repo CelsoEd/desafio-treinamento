@@ -32,17 +32,15 @@ public class TipoDaTransacaoConverter implements AttributeConverter<TipoDaTransa
 	public TipoDaTransacao convertToEntityAttribute(Integer value) {
 		switch (value) {
 		case 10:
-			return TipoDaTransacao.SAQUE_EM_CONTA;
+			return TipoDaTransacao.DEPOSITO;
 		case 20:
-			return TipoDaTransacao.DEPOSITO_EM_CONTA;
+			return TipoDaTransacao.SAQUE;
 		case 30:
-			return TipoDaTransacao.TRANSFERENCIA_ENTRE_CONTAS;
+			return TipoDaTransacao.TRANSFERENCIA;
 		case 40:
-			return TipoDaTransacao.INVESTIMENTO_EM_FUNDO;
-		case 50:
-			return TipoDaTransacao.DOC_TED;
-		case 60:
 			return TipoDaTransacao.EXTRATO;
+		case 50:
+			return TipoDaTransacao.SALDO;
 		default:
 			throw new IllegalArgumentException("Unknown" + value);
 		}

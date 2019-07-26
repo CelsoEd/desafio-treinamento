@@ -15,12 +15,12 @@ import la.foton.treinamento.desafio.autorizador.conta.entity.TipoDoLancamento;
 
 public enum TipoDaTransacao {
 
-	DEPOSITO_EM_CONTA(10, "Depósito em Conta", TipoDoLancamento.CREDITO), //
-	SAQUE_EM_CONTA(20, "Saque em Conta", TipoDoLancamento.DEBITO), //
-	TRANSFERENCIA_ENTRE_CONTAS(30, "Transferência entre Contas", TipoDoLancamento.DEBITO), //
-	INVESTIMENTO_EM_FUNDO(40, "Investimento em Fundo", TipoDoLancamento.CREDITO), //
-	DOC_TED(50, "DOC/TED entre Bancos", TipoDoLancamento.DEBITO), //
-	EXTRATO(60, "Extrato da Conta", null);
+	DEPOSITO(10, "Depósito em Conta", TipoDoLancamento.CREDITO), //
+	SAQUE(20, "Saque em Conta", TipoDoLancamento.DEBITO), //
+	TRANSFERENCIA(30, "Transferência entre Contas", TipoDoLancamento.DEBITO), //
+	EXTRATO(40, "Extrato da Conta", TipoDoLancamento.NAO_APLICAVEL),
+	SALDO(50, "Saldo da conta", TipoDoLancamento.NAO_APLICAVEL); //
+
 
 	private Integer chave;
 	private String valor;

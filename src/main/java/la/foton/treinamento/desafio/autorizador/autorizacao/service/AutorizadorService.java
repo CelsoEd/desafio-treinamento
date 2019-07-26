@@ -57,10 +57,10 @@ public class AutorizadorService {
 			if (EstadoDaAutorizacao.AUTORIZADA.equals(autorizacao.getEstado())) {
 				logService.gravaLog(autorizador.criaLog(autorizacao));
 			}
-		} catch (NegocioException ne) {
-			autorizacao.setMotivoDaNegacao(ne.getMensagem().getTexto());
-		} catch (InfraestruturaException ie) {
-			autorizacao.setMotivoDaNegacao(ie.getMensagem().getTexto());
+		} catch (NegocioException | InfraestruturaException e) {
+			autorizacao.negada();
+			autorizacao.setMotivoDaNegacao(e.getMessage());
+
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, "ERRO INTERNO: ", e);
 			autorizacao.negada();

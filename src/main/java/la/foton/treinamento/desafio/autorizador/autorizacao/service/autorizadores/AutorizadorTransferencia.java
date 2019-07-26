@@ -14,7 +14,7 @@ import la.foton.treinamento.desafio.autorizador.transacao.entity.TransacaoDeTran
 
 import javax.ejb.EJB;
 
-@Autorizador(transacao = TipoDaTransacao.TRANSFERENCIA_ENTRE_CONTAS)
+@Autorizador(transacao = TipoDaTransacao.TRANSFERENCIA)
 public class AutorizadorTransferencia extends AbstractAutorizador {
 
     @EJB

@@ -16,6 +16,8 @@ import javax.inject.Inject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import la.foton.treinamento.desafio.autorizador.autorizacao.entity.Autorizacao;
+import la.foton.treinamento.desafio.autorizador.common.configuration.JSONConverter;
+import la.foton.treinamento.desafio.autorizador.common.exception.InfraestruturaException;
 import la.foton.treinamento.desafio.autorizador.common.exception.NegocioException;
 import la.foton.treinamento.desafio.autorizador.log.entity.Log;
 import la.foton.treinamento.desafio.autorizador.transacao.converter.TransacaoJSONConverter;
@@ -30,7 +32,7 @@ public abstract class AbstractAutorizador {
 		Autorizacao autorizacao = new Autorizacao();
 
 		try {
-			String json = converter.toJSONFromTransacao(transacao);
+			String json = JSONConverter.toJSONFromObject(transacao);
 			autorizacao.setTransacao(json);
 
 			autorizacao.setNsuOrigem(transacao.getNsuOrigem());
@@ -38,21 +40,18 @@ public abstract class AbstractAutorizador {
 			autorizacao.setAgenciaOrigem(transacao.getAgencia());
 			autorizacao.setTipoDaTransacao(transacao.getTipo());
 
-			executaRegrasEspecificas(transacao);
+			executaRegrasEspecificas(transacao, autorizacao);
 			autorizacao.autorizada();
-		} catch (NegocioException ne) {
+		} catch (NegocioException | InfraestruturaException e) {
 			autorizacao.negada();
-			autorizacao.setMotivoDaNegacao(ne.getMensagem().getTexto());
-		} catch (JsonProcessingException jpe) {
-			autorizacao.negada();
-			autorizacao.setMotivoDaNegacao("Problema com o formato da transação");
+			autorizacao.setMotivoDaNegacao(e.getMessage());
 		}
 
 		return autorizacao;
 	}
 
-	protected abstract void executaRegrasEspecificas(Transacao transacao) throws NegocioException;
+	protected abstract void executaRegrasEspecificas(Transacao transacao, Autorizacao autorizacao) throws NegocioException, InfraestruturaException;
 
-	protected abstract Log criaLog(Autorizacao autorizacao) throws NegocioException;
+	protected abstract Log criaLog(Autorizacao autorizacao) throws NegocioException, InfraestruturaException;
 
 }

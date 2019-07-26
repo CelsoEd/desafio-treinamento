@@ -12,7 +12,8 @@ public enum Mensagem {
 
     // Mensagens de Infraestrutura
     AUTORIZADOR_NAO_ENCONTRADO("Nao existe um autorizador para o código de transação {0}"),
-    NAO_EXISTEM_CONTAS("Não foi encontrada nenhuma conta") ;
+    NAO_EXISTEM_CONTAS("Não foi encontrada nenhuma conta"),
+    ERRO_CONVERSAO_JSON ("Erro de conversão de JSON");
 
     private String texto;
 

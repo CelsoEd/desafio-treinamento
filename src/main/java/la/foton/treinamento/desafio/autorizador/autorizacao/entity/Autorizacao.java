@@ -35,126 +35,137 @@ import la.foton.treinamento.desafio.autorizador.transacao.entity.TipoDaTransacao
 @Table(name = "AUT")
 public class Autorizacao {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "AUTNSUBLK")
-	private Long nsu;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "AUTNSUBLK")
+    private Long nsu;
 
-	@Column(name = "AUTDATHOR")
-	private LocalDateTime dataHora;
+    @Column(name = "AUTDATHOR")
+    private LocalDateTime dataHora;
 
-	@Column(name = "AUTNSUORI")
-	private Long nsuOrigem;
+    @Column(name = "AUTNSUORI")
+    private Long nsuOrigem;
 
-	@Column(name = "AUTDATREF")
-	private LocalDate dataReferencia;
+    @Column(name = "AUTDATREF")
+    private LocalDate dataReferencia;
 
-	@Convert(converter = CanalDeAtendimentoConverter.class)
-	@Column(name = "CNLCOD")
-	private CanalDeAtendimento canal;
+    @Convert(converter = CanalDeAtendimentoConverter.class)
+    @Column(name = "CNLCOD")
+    private CanalDeAtendimento canal;
 
-	@Column(name = "PTACODORI")
-	private Integer agenciaOrigem;
+    @Column(name = "PTACODORI")
+    private Integer agenciaOrigem;
 
-	@Convert(converter = TipoDaTransacaoConverter.class)
-	@Column(name = "TTRCOD")
-	private TipoDaTransacao tipoDaTransacao;
+    @Convert(converter = TipoDaTransacaoConverter.class)
+    @Column(name = "TTRCOD")
+    private TipoDaTransacao tipoDaTransacao;
 
-	@Lob
-	@Column(name = "AUTTRN")
-	private String transacao;
+    @Lob
+    @Column(name = "AUTTRN")
+    private String transacao;
 
-	@Column(name = "AUTMOTNEG")
-	private String motivoDaNegacao;
+    @Column(name = "AUTMOTNEG")
+    private String motivoDaNegacao;
 
-	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "AUTSTA")
-	private EstadoDaAutorizacao estado;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "AUTSTA")
+    private EstadoDaAutorizacao estado;
 
-	public Autorizacao() {
-		this.estado = EstadoDaAutorizacao.NEGADA;
-	}
+    @Lob
+    @Column(name = "AUTPRT")
+    private String particao;
 
-	@PrePersist
-	public void prePersist() {
-		this.dataHora = LocalDateTime.now();
-		this.dataReferencia = LocalDate.now();
-	}
+    public Autorizacao() {
+        this.estado = EstadoDaAutorizacao.NEGADA;
+    }
 
-	public Long getNsu() {
-		return nsu;
-	}
+    @PrePersist
+    public void prePersist() {
+        this.dataHora = LocalDateTime.now();
+        this.dataReferencia = LocalDate.now();
+    }
 
-	public void setNsu(Long nsu) {
-		this.nsu = nsu;
-	}
+    public Long getNsu() {
+        return nsu;
+    }
 
-	public Long getNsuOrigem() {
-		return nsuOrigem;
-	}
+    public void setNsu(Long nsu) {
+        this.nsu = nsu;
+    }
 
-	public void setNsuOrigem(Long nsuOrigem) {
-		this.nsuOrigem = nsuOrigem;
-	}
+    public Long getNsuOrigem() {
+        return nsuOrigem;
+    }
 
-	public LocalDateTime getDataHora() {
-		return dataHora;
-	}
+    public void setNsuOrigem(Long nsuOrigem) {
+        this.nsuOrigem = nsuOrigem;
+    }
 
-	public LocalDate getDataReferencia() {
-		return dataReferencia;
-	}
+    public LocalDateTime getDataHora() {
+        return dataHora;
+    }
 
-	public CanalDeAtendimento getCanal() {
-		return canal;
-	}
+    public LocalDate getDataReferencia() {
+        return dataReferencia;
+    }
 
-	public void setCanal(CanalDeAtendimento canal) {
-		this.canal = canal;
-	}
+    public CanalDeAtendimento getCanal() {
+        return canal;
+    }
 
-	public Integer getAgenciaOrigem() {
-		return agenciaOrigem;
-	}
+    public void setCanal(CanalDeAtendimento canal) {
+        this.canal = canal;
+    }
 
-	public void setAgenciaOrigem(Integer agenciaOrigem) {
-		this.agenciaOrigem = agenciaOrigem;
-	}
+    public Integer getAgenciaOrigem() {
+        return agenciaOrigem;
+    }
 
-	public TipoDaTransacao getTipoDaTransacao() {
-		return tipoDaTransacao;
-	}
+    public void setAgenciaOrigem(Integer agenciaOrigem) {
+        this.agenciaOrigem = agenciaOrigem;
+    }
 
-	public void setTipoDaTransacao(TipoDaTransacao tipoDaTransacao) {
-		this.tipoDaTransacao = tipoDaTransacao;
-	}
+    public TipoDaTransacao getTipoDaTransacao() {
+        return tipoDaTransacao;
+    }
 
-	public String getTransacao() {
-		return transacao;
-	}
+    public void setTipoDaTransacao(TipoDaTransacao tipoDaTransacao) {
+        this.tipoDaTransacao = tipoDaTransacao;
+    }
 
-	public void setTransacao(String transacao) {
-		this.transacao = transacao;
-	}
+    public String getTransacao() {
+        return transacao;
+    }
 
-	public String getMotivoDaNegacao() {
-		return motivoDaNegacao;
-	}
+    public void setTransacao(String transacao) {
+        this.transacao = transacao;
+    }
 
-	public void setMotivoDaNegacao(String motivoDaNegacao) {
-		this.motivoDaNegacao = motivoDaNegacao;
-	}
+    public String getMotivoDaNegacao() {
+        return motivoDaNegacao;
+    }
 
-	public EstadoDaAutorizacao getEstado() {
-		return estado;
-	}
+    public void setMotivoDaNegacao(String motivoDaNegacao) {
+        this.motivoDaNegacao = motivoDaNegacao;
+    }
 
-	public void autorizada() {
-		this.estado = EstadoDaAutorizacao.AUTORIZADA;
-	}
+    public EstadoDaAutorizacao getEstado() {
+        return estado;
+    }
 
-	public void negada() {
-		this.estado = EstadoDaAutorizacao.NEGADA;
-	}
+    public void autorizada() {
+        this.estado = EstadoDaAutorizacao.AUTORIZADA;
+    }
 
+    public void negada() {
+        this.estado = EstadoDaAutorizacao.NEGADA;
+    }
+
+    public String getParticao() {
+        return particao;
+    }
+
+    public void setParticao(String particao) {
+        this.particao = particao;
+    }
 }

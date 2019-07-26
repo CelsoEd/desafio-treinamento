@@ -39,8 +39,7 @@ public class Transacao implements Serializable {
 	@NotNull
 	private Integer conta;
 
-	@NotNull
-	private BigDecimal valor;
+
 
 	public Long getNsuOrigem() {
 		return nsuOrigem;
@@ -90,12 +89,5 @@ public class Transacao implements Serializable {
 		this.conta = conta;
 	}
 
-	public BigDecimal getValor() {
-		return valor;
-	}
-
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
-	}
 
 }

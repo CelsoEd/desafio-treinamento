@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 @Path("autorizador")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class AutorizadorWS {
+public class AutorizadorWS extends AbstractAutorisadoResource{
 
     @EJB
     private AutorizadorService autorizadorService;

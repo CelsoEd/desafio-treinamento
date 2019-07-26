@@ -11,6 +11,7 @@
  */
 package la.foton.treinamento.desafio.autorizador.common.configuration;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,6 +23,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -31,16 +33,18 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import la.foton.treinamento.desafio.autorizador.common.exception.InfraestruturaException;
+import la.foton.treinamento.desafio.autorizador.common.exception.Mensagem;
 
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
-public class JacksonConfiguration implements ContextResolver<ObjectMapper> {
+public class JSONConverter implements ContextResolver<ObjectMapper> {
 
 	private static final String FORMATO_DATA_HORA = "dd/MM/yyyy HH:mm:ss";
 	private static final String FORMATO_DATA = "dd/MM/yyyy";
-	public static final ObjectMapper MAPPER = new ObjectMapper();
+	private static final ObjectMapper MAPPER = new ObjectMapper();
 
-	public JacksonConfiguration() {
+	public JSONConverter() {
 		MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
@@ -69,6 +73,22 @@ public class JacksonConfiguration implements ContextResolver<ObjectMapper> {
 	@Override
 	public ObjectMapper getContext(Class<?> type) {
 		return MAPPER;
+	}
+
+	public static String toJSONFromObject(Object object) throws InfraestruturaException {
+		try {
+			return MAPPER.writeValueAsString(object);
+		} catch (JsonProcessingException e) {
+			throw new InfraestruturaException(Mensagem.ERRO_CONVERSAO_JSON);
+		}
+	}
+
+	public static Object toObjectFromJSON(String json, Class<?> clazz) throws InfraestruturaException {
+		try {
+			return MAPPER.readValue(json, clazz);
+		} catch (IOException e) {
+			throw new InfraestruturaException(Mensagem.ERRO_CONVERSAO_JSON);
+		}
 	}
 
 }
