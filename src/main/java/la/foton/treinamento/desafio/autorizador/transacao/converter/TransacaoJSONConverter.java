@@ -11,12 +11,12 @@ public class TransacaoJSONConverter<T extends Transacao> {
 
 	protected Class<T> classeTransacao;
 
-	public String toJSONFromTransacao(T transacao) throws JsonProcessingException {
-		return JSONConverter.MAPPER.writeValueAsString(transacao);
-	}
-
-	public Transacao toTransacaoFromJSON(String json) throws IOException {
-		return JSONConverter.MAPPER.readValue(json, classeTransacao);
-	}
+//	public String toJSONFromTransacao(T transacao) throws JsonProcessingException {
+//		return JSONConverter.MAPPER.writeValueAsString(transacao);
+//	}
+//
+//	public Transacao toTransacaoFromJSON(String json) throws IOException {
+//		return JSONConverter.MAPPER.readValue(json, classeTransacao);
+//	}
 
 }

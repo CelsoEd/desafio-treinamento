@@ -21,7 +21,7 @@ public class AutorizadorTransferencia extends AbstractAutorizador {
     private ContaService contaService;
 
     @Override
-    protected void executaRegrasEspecificas(Transacao transacao) throws NegocioException {
+    protected void executaRegrasEspecificas(Transacao transacao, Autorizacao autorizacao) throws NegocioException {
         TransacaoDeTransferencia transacaoDeTransferencia = (TransacaoDeTransferencia) transacao;
         Conta conta = contaService.consultaContaPorAgenciaENumero(transacaoDeTransferencia.getAgencia(), transacaoDeTransferencia.getConta());
         Conta contaFavorecido = contaService.consultaContaPorAgenciaENumero(transacaoDeTransferencia.getAgenciaFavorecido(),

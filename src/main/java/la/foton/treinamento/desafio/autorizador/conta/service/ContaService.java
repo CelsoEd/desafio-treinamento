@@ -15,6 +15,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Stateless
 public class ContaService {
@@ -47,6 +48,10 @@ public class ContaService {
     public void geraLancamento(Conta conta, BigDecimal valor, TipoDoLancamento tipoDoLancamento, String descricao) {
         LancamentoDaConta lancamentoDaConta = new LancamentoDaConta(tipoDoLancamento, descricao, valor, conta);
         lancamentoDAO.insere(lancamentoDaConta);
+    }
+
+    public List<LancamentoDaConta> consultaLancamento(Conta conta){
+        return conta.getLancamentos();
     }
 
 }

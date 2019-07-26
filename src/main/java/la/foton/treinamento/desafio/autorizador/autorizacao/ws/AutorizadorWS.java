@@ -3,6 +3,7 @@ package la.foton.treinamento.desafio.autorizador.autorizacao.ws;
 import la.foton.treinamento.desafio.autorizador.autorizacao.service.AutorizadorService;
 import la.foton.treinamento.desafio.autorizador.transacao.entity.Transacao;
 import la.foton.treinamento.desafio.autorizador.transacao.entity.TransacaoDeTransferencia;
+import la.foton.treinamento.desafio.autorizador.transacao.entity.TransacaoFinanceira;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -26,14 +27,20 @@ public class AutorizadorWS extends AbstractAutorisadoResource{
 
     @POST
     @Path("deposito-saque")
-    public Response autorizaDepositoSaque(Transacao transacao) {
-        return Response.ok(autorizadorService.executa(transacao)).build();
+    public Response autorizaDepositoSaque(TransacaoFinanceira transacaoFinanceira) {
+        return Response.ok(autorizadorService.executa(transacaoFinanceira)).build();
     }
 
     @POST
     @Path("transferencia")
     public Response autorizaTransferencia(TransacaoDeTransferencia transacaoDeTransferencia) {
         return Response.ok(autorizadorService.executa(transacaoDeTransferencia)).build();
+    }
+
+    @POST
+    @Path("saldo")
+    public Response lancamentos(Transacao transacao){
+        return Response.ok(autorizadorService.executa(transacao)).build();
     }
 
 }

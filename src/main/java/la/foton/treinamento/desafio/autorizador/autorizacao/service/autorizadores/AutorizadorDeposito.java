@@ -10,6 +10,7 @@ import la.foton.treinamento.desafio.autorizador.conta.service.ContaService;
 import la.foton.treinamento.desafio.autorizador.log.entity.Log;
 import la.foton.treinamento.desafio.autorizador.transacao.entity.TipoDaTransacao;
 import la.foton.treinamento.desafio.autorizador.transacao.entity.Transacao;
+import la.foton.treinamento.desafio.autorizador.transacao.entity.TransacaoFinanceira;
 
 import javax.ejb.EJB;
 
@@ -20,10 +21,10 @@ public class AutorizadorDeposito extends AbstractAutorizador {
     private ContaService contaService;
 
     @Override
-    protected void executaRegrasEspecificas(Transacao transacao) throws NegocioException {
+    protected void executaRegrasEspecificas(Transacao transacao, Autorizacao autorizacao) throws NegocioException {
         Conta conta = contaService.consultaContaPorAgenciaENumero(transacao.getAgencia(), transacao.getConta());
-        conta.credita(transacao.getValor());
-        contaService.geraLancamento(conta, transacao.getValor(), TipoDoLancamento.CREDITO, "Crédito em conta");
+        conta.credita(((TransacaoFinanceira)transacao).getValor());
+        contaService.geraLancamento(conta, ((TransacaoFinanceira)transacao).getValor(), TipoDoLancamento.CREDITO, TipoDoLancamento.CREDITO.getValor());
         contaService.atualizaConta(conta);
     }
 
