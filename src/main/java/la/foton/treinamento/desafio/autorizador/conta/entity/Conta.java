@@ -57,7 +57,7 @@ public class Conta {
     }
 
     public void transfere(BigDecimal valor, Conta contaFavorecido) throws NegocioException {
-        debita(valor);
+        this.debita(valor);
         contaFavorecido.credita(valor);
     }
 

@@ -38,9 +38,8 @@ public class AutorizadorWS extends AbstractAutorisadoResource{
     }
 
     @POST
-    @Path("saldo")
-    public Response lancamentos(Transacao transacao){
+    @Path("lancamento-saldo")
+    public Response autorizaSaldo(Transacao transacao){
         return Response.ok(autorizadorService.executa(transacao)).build();
     }
-
 }

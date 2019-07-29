@@ -8,7 +8,6 @@ import la.foton.treinamento.desafio.autorizador.common.exception.InfraestruturaE
 import la.foton.treinamento.desafio.autorizador.common.exception.NegocioException;
 import la.foton.treinamento.desafio.autorizador.conta.entity.Conta;
 import la.foton.treinamento.desafio.autorizador.conta.service.ContaService;
-import la.foton.treinamento.desafio.autorizador.log.entity.Log;
 import la.foton.treinamento.desafio.autorizador.transacao.entity.TipoDaTransacao;
 import la.foton.treinamento.desafio.autorizador.transacao.entity.Transacao;
 
@@ -25,16 +24,5 @@ public class AutorizadorExtrato extends AbstractAutorizador {
     protected void executaRegrasEspecificas(Transacao transacao, Autorizacao autorizacao) throws NegocioException, InfraestruturaException {
         Conta conta = contaService.consultaContaPorAgenciaENumero(transacao.getAgencia(),transacao.getConta());
         autorizacao.setParticao(JSONConverter.toJSONFromObject(conta.getLancamentos()));
-    }
-
-    @Override
-    protected Log criaLog(Autorizacao autorizacao) {
-        Log log = new Log();
-        log.setAgencia(autorizacao.getAgenciaOrigem());
-        log.setCanal(autorizacao.getCanal());
-        log.setDataRefencia(autorizacao.getDataReferencia());
-        log.setTipoDaTransacao(autorizacao.getTipoDaTransacao());
-        log.setParticao(autorizacao.getTransacao());
-        return log;
     }
 }

@@ -13,10 +13,14 @@ import java.util.List;
 @Stateless
 public class ClienteService {
 
+
     @Inject
     private ClienteDAO clienteDAO;
 
-    public Cliente novoCliente(Cliente cliente) {
+    public Cliente novoCliente(String nome, String cpf) {
+        Cliente cliente = new Cliente();
+        cliente.setNome(nome);
+        cliente.setCpf(cpf);
         clienteDAO.insere(cliente);
         return cliente;
     }

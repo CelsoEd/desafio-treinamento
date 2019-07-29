@@ -22,7 +22,7 @@ public class ClienteWS {
     @POST
     @Path("novo")
     public Response novoCliente(ClienteDTO clienteDTO) {
-        Cliente cliente = clienteService.novoCliente(clienteDTO.paraCliente());
+        Cliente cliente = clienteService.novoCliente(clienteDTO.getNome(), clienteDTO.getCpf());
         return Response.created(UriBuilder.fromPath("cliente/consulta/{cpf}").build(cliente.getCpf())).build();
     }
 
