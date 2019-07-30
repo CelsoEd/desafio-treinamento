@@ -9,6 +9,7 @@ import la.foton.treinamento.desafio.autorizador.conta.dao.LancamentoDAO;
 import la.foton.treinamento.desafio.autorizador.conta.entity.Conta;
 import la.foton.treinamento.desafio.autorizador.conta.entity.LancamentoDaConta;
 import la.foton.treinamento.desafio.autorizador.conta.entity.TipoDoLancamento;
+import la.foton.treinamento.desafio.autorizador.conta.entity.TipoDoPacoteDeServicos;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -29,8 +30,11 @@ public class ContaService {
     @EJB
     private ClienteService clienteService;
 
-    public Conta novaConta(Conta conta, String cpf) throws NegocioException {
+    public Conta novaConta(Integer agencia, TipoDoPacoteDeServicos tipoDoPacoteDeServicos, String cpf) throws NegocioException {
         Cliente cliente = clienteService.consultaCliente(cpf);
+        Conta conta = new Conta();
+        conta.setAgencia(agencia);
+        conta.setTipoDoPacoteDeServicos(tipoDoPacoteDeServicos);
         conta.setTitular(cliente);
         contaDAO.insere(conta);
         return conta;
