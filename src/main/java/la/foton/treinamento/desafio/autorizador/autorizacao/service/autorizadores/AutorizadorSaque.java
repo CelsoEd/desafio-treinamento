@@ -24,7 +24,7 @@ public class AutorizadorSaque extends AbstractAutorizador {
     protected void executaRegrasEspecificas(Transacao transacao , Autorizacao autorizacao) throws NegocioException {
         Conta conta = contaService.consultaContaPorAgenciaENumero(transacao.getAgencia(), transacao.getConta());
         conta.debita(((TransacaoFinanceira)transacao).getValor());
-        contaService.geraLancamento(conta, ((TransacaoFinanceira)transacao).getValor(), TipoDoLancamento.DEBITO, "Débito em conta");
+        contaService.geraLancamento(conta, ((TransacaoFinanceira)transacao).getValor(), TipoDoLancamento.DEBITO, TipoDaTransacao.SAQUE.getValor());
         contaService.atualizaConta(conta);
     }
 }
