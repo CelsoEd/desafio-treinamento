@@ -52,14 +52,6 @@ public abstract class AbstractAutorizador {
 
 	protected abstract void executaRegrasEspecificas(Transacao transacao, Autorizacao autorizacao) throws NegocioException, InfraestruturaException;
 
-	protected Log criaLog(Autorizacao autorizacao) throws NegocioException, InfraestruturaException {
-		Log log = new Log();
-		log.setAgencia(autorizacao.getAgenciaOrigem());
-		log.setCanal(autorizacao.getCanal());
-		log.setDataRefencia(autorizacao.getDataReferencia());
-		log.setTipoDaTransacao(autorizacao.getTipoDaTransacao());
-		log.setParticao(JSONConverter.toJSONFromObject(autorizacao));
-		return log;
-	}
+	protected abstract Log criaLog(Autorizacao autorizacao) throws NegocioException, InfraestruturaException;
 
 }
